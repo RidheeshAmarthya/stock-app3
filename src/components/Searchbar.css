@@ -1,0 +1,73 @@
+/* Searchbar.css */
+.searchbar-container {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border: 2px solid #1d279d; /* Added colored border */
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  margin-right: 10px;
+}
+
+.clear-button,
+.search-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.clear-button {
+  font-size: 18px;
+  color: #555;
+}
+
+.clear-button:hover {
+  color: #000; /* Darken the color on hover for better interaction feedback */
+}
+
+.description {
+  font-size: 0.9em; /* Slightly smaller font size for the description */
+}
+
+.suggestion-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Styling for ticker and description inside the suggestion item */
+.ticker {
+  font-weight: bold;
+}
+
+.suggestion-item {
+  text-align: left;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestions-dropdown {
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

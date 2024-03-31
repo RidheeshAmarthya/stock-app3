@@ -1,0 +1,33 @@
+/* Watchlist.css */
+.watchlist-container {
+  width: 100%;
+  max-width: 600px; /* or your preferred width */
+  margin: auto;
+}
+
+.watchlist-header {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.stock-name {
+  font-weight: bold;
+}
+
+.price-up {
+  color: green;
+}
+
+.price-down {
+  color: red;
+}
