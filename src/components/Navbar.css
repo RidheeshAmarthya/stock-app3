@@ -1,18 +1,24 @@
-a {
+.container a {
   color: grey;
   text-decoration: none;
   font-family: Arial, sans-serif;
 }
 
-a:hover {
+.container a:hover {
   color: white;
   cursor: pointer;
+}
+
+.modal-content {
+  max-width: "20%";
 }
 
 .container {
   background: #1d279d;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  /* This will vertically center the children */
 }
 
 a.logo {
@@ -25,9 +31,147 @@ ul {
   display: flex;
   list-style-type: none;
   margin: 0;
+  align-items: left; /* This helps to align list items in the middle */
 }
 
 ul a {
   padding: 1rem;
   display: inline-block;
+}
+
+.search-link {
+  display: inline-flex; /* Allows for better control over alignment */
+  align-items: center; /* Vertically centers the text inside the link */
+  justify-content: center; /* Horizontally centers the text inside the link */
+  border: 2px solid grey;
+  border-radius: 15px;
+  padding: 10px;
+  height: fit-content; /* Ensures the link size fits its content, respecting padding */
+}
+
+/* Existing styles */
+
+/* Hamburger Menu Button */
+.hamburger {
+  display: none;
+  font-size: 24px; /* Adjust as needed */
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  order: 3; /* Adjust the order of the hamburger icon */
+
+  /* Additional styles */
+  padding: 1rem;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+.news-container {
+  gridtemplatecolumns: "1fr 1fr";
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show the hamburger icon on mobile */
+    order: 3;
+  }
+
+  nav {
+    display: none; /* Hide menu by default on mobile */
+  }
+
+  .nav-active {
+    display: block; /* Show menu when active */
+  }
+
+  ul {
+    flex-direction: column; /* Stack menu items vertically */
+    width: 100%; /* Full width */
+    padding: 10px;
+    z-index: 10000;
+    background: #1d279d;
+    position: absolute;
+    top: 60px; /* Adjust based on your header height */
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Additional styles */
+    margin: 0;
+  }
+
+  .Share-box {
+    padding: 0px;
+  }
+}
+
+.search-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns the text to the left */
+  border: 2px solid grey;
+  border-radius: 15px;
+  padding: 10px;
+  height: fit-content;
+  width: 80%; /* Makes the border long */
+}
+
+.chart1 {
+  padding-top: 20px;
+}
+.stock-details {
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
+.stock-details h2 {
+  font-size: 18px; /* Adjust the font size of headings */
+}
+
+.stock-details p {
+  margin: 0.5rem 0; /* Adjust the margins of paragraphs */
+}
+
+.stock-details ul {
+  padding: 0; /* Reset padding for unordered lists */
+}
+
+.stock-details .value {
+  font-size: 16px; /* Adjust the font size of values */
+}
+.stock-details img {
+  max-width: 100%; /* Ensure images don't exceed their container width */
+  height: auto; /* Maintain aspect ratio */
+}
+.modal-content {
+  width: 80vw; /* Adjust modal width for mobile devices */
+  padding: 5%; /* Provide padding relative to the viewport size */
+  overflow-y: auto; /* Enable scrolling for longer content */
+}
+
+.news-container {
+  display: grid;
+  gridtemplatecolumns: 1fr; /* Stack news items in one column */
+  gridgap: 10px; /* Adjust gap between items for smaller screens */
+}
+
+.news-item img {
+  width: 100px; /* Adjust image size for smaller screens */
+  height: auto; /* Maintain aspect ratio */
+}
+.news-item {
+  display: flex;
+  flex-direction: column; /* Stack the image and text vertically */
+  align-items: center; /* Center-align items for a neater appearance */
+  text-align: center; /* Ensure text is centered under the image */
+}
+
+.news-item img {
+  width: 100%; /* Make images responsive */
+  max-width: 150px; /* Limit image width while maintaining aspect ratio */
+  height: auto; /* Adjust height automatically */
+  margin-bottom: 10px; /* Add some space bZetween the image and the headline */
+}
+
+.modal-content {
+  width: 80%;
 }

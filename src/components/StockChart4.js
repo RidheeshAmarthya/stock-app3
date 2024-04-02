@@ -3,16 +3,36 @@ import Highcharts from "highcharts";
 
 const EarningsSurpriseChart = ({ earningsData }) => {
   useEffect(() => {
-    if (!earningsData) return;
+    if (!earningsData || earningsData.length === 0) return;
 
-    // Convert the period into a more readable format if necessary
-    const categories = earningsData.map(
-      (dataPoint) => `Q${dataPoint.quarter} ${dataPoint.year}`
-    );
+    const categories = earningsData.map((dataPoint) => {
+      const surprise = dataPoint.actual - dataPoint.estimate;
+      let monthDay;
+      switch (dataPoint.quarter) {
+        case 1:
+          monthDay = "01-01";
+          break;
+        case 2:
+          monthDay = "04-01";
+          break;
+        case 3:
+          monthDay = "07-01";
+          break;
+        case 4:
+          monthDay = "10-01";
+          break;
+        default:
+          monthDay = "01-01";
+      }
+      const dateString = `${dataPoint.year}-${monthDay}`;
+      // Use a non-breaking space and a span to manage layout
+      return `${dateString}<br><span style="display:inline-block; min-width:50px;">Surprise:&nbsp;${surprise.toFixed(
+        2
+      )}</span><br>`;
+    });
 
-    // Actual and Estimated Earnings Data
     const actualEarnings = {
-      name: "Actual Earnings",
+      name: "Actual",
       data: earningsData.map((dataPoint) => dataPoint.actual),
       marker: {
         symbol: "square",
@@ -20,7 +40,7 @@ const EarningsSurpriseChart = ({ earningsData }) => {
     };
 
     const estimatedEarnings = {
-      name: "Estimated Earnings",
+      name: "Estimated",
       data: earningsData.map((dataPoint) => dataPoint.estimate),
       marker: {
         symbol: "diamond",
@@ -30,19 +50,23 @@ const EarningsSurpriseChart = ({ earningsData }) => {
     Highcharts.chart("earnings-surprise-chart-container", {
       chart: {
         type: "spline",
+        backgroundColor: "#f0f0f0",
       },
       title: {
-        text: "NVDA Earnings Surprise Analysis",
+        text: "Historical EPS Surprises",
       },
       xAxis: {
         categories: categories,
+        labels: {
+          useHTML: true,
+        },
         title: {
           text: "Period",
         },
       },
       yAxis: {
         title: {
-          text: "Earnings Per Share (USD)",
+          text: "Quarterly EPS",
         },
         labels: {
           format: "{value}",
@@ -68,7 +92,12 @@ const EarningsSurpriseChart = ({ earningsData }) => {
     });
   }, [earningsData]);
 
-  return <div id="earnings-surprise-chart-container"></div>;
+  return (
+    <div
+      id="earnings-surprise-chart-container"
+      style={{ width: "100%", height: "400px" }}
+    ></div>
+  );
 };
 
 export default EarningsSurpriseChart;

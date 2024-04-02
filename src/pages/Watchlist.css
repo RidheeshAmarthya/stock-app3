@@ -1,33 +1,68 @@
 /* Watchlist.css */
 .watchlist-container {
-  width: 100%;
-  max-width: 600px; /* or your preferred width */
-  margin: auto;
+  align-items: center;
+  padding-left: 20%;
+  padding-right: 20%;
+  font-family: "Arial", sans-serif;
 }
 
 .watchlist-header {
-  text-align: left;
-  padding-bottom: 20px;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  font-size: 24px; /* Adjust size as needed */
 }
 
 .stock-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
+  margin-bottom: 10px; /* Remove space between items */
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Arial", sans-serif;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
 }
 
-.stock-name {
+.stock-prices {
+  font-size: 20px; /* Adjust size as needed */
   font-weight: bold;
 }
 
+.Right-Prices {
+  padding-top: 25px;
+  padding-right: 20%;
+}
+
+.stock-ticker {
+  font-size: 20px; /* Adjust size as needed */
+  font-weight: bold;
+}
+
+.stock-name {
+  font-size: 16px; /* Adjust size as needed */
+}
+
+.delete-button {
+  padding-top: 10px;
+  background-color: #ffffff; /* Red color */
+  color: rgb(0, 0, 0);
+  border: none;
+  text-align: right;
+  cursor: pointer;
+}
+
 .price-up {
-  color: green;
+  color: #4caf50; /* Green color, you can choose a different shade if you prefer */
 }
 
 .price-down {
-  color: red;
+  color: #f44336; /* Red color, you can choose a different shade if you prefer */
+}
+
+@media (max-width: 768px) {
+  .Right-Prices {
+    padding-right: 0;
+  }
 }

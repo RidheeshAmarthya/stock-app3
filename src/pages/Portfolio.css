@@ -1,0 +1,92 @@
+/* Portfolio.css */
+.portfolio-container {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: "Arial", sans-serif;
+}
+
+.portfolio-container h2 {
+  text-align: left;
+}
+
+.wallet-balance {
+  text-align: left;
+}
+
+.stock-card {
+  background-color: #fff;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+.stock-card h3 {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: 0 0;
+  font-weight: normal; /* Adjusted from bold to normal to make it lighter */
+  color: #888; /* Optional: change the color to a lighter shade for lighter appearance */
+}
+
+/*here is the css for the stock details*/
+
+/* Portfolio.css updates */
+.stock-stuff {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.stock-stuff > div {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.stock-stuff p {
+  text-align: left;
+}
+
+.stock-stuff p.label {
+  text-align: left;
+  font-weight: bold;
+}
+
+/*here is the css for the buy/sell buttons*/
+
+.stock-card p {
+  color: #666;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Update for the buy/sell buttons container */
+.stock-card .buy-sell-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  background-color: #f5f5f5;
+  padding: 5px;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.buy-button {
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  background-color: #0056b3;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sell-button {
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  background-color: #d9534f;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

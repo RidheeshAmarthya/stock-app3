@@ -1,23 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom"; // Import Link
+import { NavLink } from "react-router-dom"; // Import NavLink
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false); // Add state to control menu visibility
+
+  // Function to close the menu
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="container">
-      <Link to="/search" className="logo">
+      <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+        {/* Toggle Button */}☰
+      </button>
+      <NavLink
+        to="/search"
+        className={({ isActive }) => (isActive ? "logo" : "logo")}
+        onClick={closeMenu} // Close menu when logo is clicked
+      >
         Stock Search
-      </Link>
-      <nav>
+      </NavLink>
+      <nav className={isOpen ? "nav-active" : ""}>
+        {/* Control visibility */}
         <ul>
           <li>
-            <Link to="/search">Search</Link>
+            <NavLink
+              to="/search"
+              className={({ isActive }) => (isActive ? "search-link" : "")}
+              onClick={closeMenu} // Close menu when link is clicked
+            >
+              Search
+            </NavLink>
           </li>
           <li>
-            <Link to="/watchlist">Watchlist</Link>
+            <NavLink
+              to="/watchlist"
+              className={({ isActive }) => (isActive ? "search-link" : "")}
+              onClick={closeMenu} // Close menu when link is clicked
+            >
+              Watchlist
+            </NavLink>
           </li>
           <li>
-            <Link to="/portfolio">Portfolio</Link>
+            <NavLink
+              to="/portfolio"
+              className={({ isActive }) => (isActive ? "search-link" : "")}
+              onClick={closeMenu} // Close menu when link is clicked
+            >
+              Portfolio
+            </NavLink>
           </li>
         </ul>
       </nav>

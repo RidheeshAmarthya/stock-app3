@@ -4,8 +4,9 @@ import HighchartsReact from "highcharts-react-official";
 
 // Load Highcharts modules
 require("highcharts/indicators/indicators-all")(Highcharts);
+require("highcharts/modules/exporting")(Highcharts);
 
-const StockChart2 = ({ dailyStockData }) => {
+const StockChart2 = ({ dailyStockData, ticker }) => {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
@@ -36,8 +37,44 @@ const StockChart2 = ({ dailyStockData }) => {
 
       // Set chart options
       setChartOptions({
-        rangeSelector: { selected: 2 },
-        title: { text: "AAPL Historical" },
+        chart: {
+          backgroundColor: "#f0f0f0", // Set the background color to grey
+        },
+        rangeSelector: {
+          selected: 6, // This value depends on your specific button setup for 6 months
+          inputEnabled: true,
+          buttons: [
+            {
+              type: "month",
+              count: 1,
+              text: "1m",
+            },
+            {
+              type: "month",
+              count: 3,
+              text: "3m",
+            },
+            {
+              type: "month",
+              count: 6,
+              text: "6m",
+            },
+            {
+              type: "ytd",
+              text: "YTD",
+            },
+            {
+              type: "year",
+              count: 1,
+              text: "1y",
+            },
+            {
+              type: "all",
+              text: "All",
+            },
+          ],
+        },
+        title: { text: ticker + " Historical" },
         subtitle: { text: "With SMA and Volume by Price technical indicators" },
         yAxis: [
           {
@@ -65,7 +102,7 @@ const StockChart2 = ({ dailyStockData }) => {
         series: [
           {
             type: "candlestick",
-            name: "AAPL",
+            name: ticker, // Use the ticker variable for the series name
             id: "aapl",
             zIndex: 2,
             data: ohlc,
@@ -95,7 +132,7 @@ const StockChart2 = ({ dailyStockData }) => {
     };
 
     processData();
-  }, [dailyStockData]); // Add dailyStockData as a dependency here
+  }, [dailyStockData, ticker]); // Add ticker as a dependency as well
 
   return (
     <div>

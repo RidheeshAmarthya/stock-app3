@@ -50,9 +50,7 @@ const SellStock = ({
       } else {
         // If no stock remains, remove it from the portfolio and call delete API
         updatedPortfolio.splice(stockIndex, 1);
-        await axios.delete(
-          `http://localhost:3001/DeleteFromPortfolio/${ticker}`
-        );
+        await axios.delete(`/DeleteFromPortfolio/${ticker}`);
       }
 
       // Update the wallet balance
@@ -78,7 +76,9 @@ const SellStock = ({
 
   return (
     <>
-      <button onClick={() => setIsModalOpen(true)}>Sell</button>
+      <button className="sell-button" onClick={() => setIsModalOpen(true)}>
+        Sell
+      </button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div>
           <h2>Sell {ticker}</h2>

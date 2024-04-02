@@ -68,12 +68,9 @@ const BuyStock = ({
       }
 
       // Now, update the wallet balance on the server
-      await axios.patch(
-        "http://localhost:3001/balance/66066e225c4da4de1832cc40",
-        {
-          balance: newWalletBalance,
-        }
-      );
+      await axios.patch("/balance/66066e225c4da4de1832cc40", {
+        balance: newWalletBalance,
+      });
 
       setIsModalOpen(false); // Close the modal
     } catch (error) {
@@ -84,7 +81,9 @@ const BuyStock = ({
 
   return (
     <>
-      <button onClick={() => setIsModalOpen(true)}>Buy</button>
+      <button className="buy-button" onClick={() => setIsModalOpen(true)}>
+        Buy
+      </button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div>
           <h2>Buy {ticker}</h2>

@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import Search from "./pages/Search";
 import Portfolio from "./pages/Portfolio";
 import Watchlist from "./pages/Watchlist";
+import { StockDataProvider } from "./pages/Context"; // Import the context provider
+import Footer from "./pages/footer"; // Import the Footer component
 
 function App() {
   const [stockSymbol, setStockSymbol] = useState("");
@@ -36,22 +38,28 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route
-            path="/search"
-            element={
-              <Search onSearch={handleStockSearch} stockSymbol={stockSymbol} />
-            }
-          />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route
-            path="/watchlist"
-            element={<Watchlist key={window.location.pathname} />}
-          />
-        </Routes>
-      </div>
+      <StockDataProvider>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route
+              path="/watchlist"
+              element={<Watchlist key={window.location.pathname} />}
+            />
+            {/* Update the Search Route to include dynamic ticker */}
+            <Route
+              path="/search"
+              element={<Search onSearch={handleStockSearch} />}
+            />
+            <Route
+              path="/search/:ticker"
+              element={<Search onSearch={handleStockSearch} />}
+            />
+          </Routes>
+          <Footer />
+        </div>
+      </StockDataProvider>
     </Router>
   );
 }

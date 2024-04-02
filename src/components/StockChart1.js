@@ -1,8 +1,9 @@
-// StockChart.js
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 
-const StockChart1 = ({ dailyStockData }) => {
+const StockChart1 = ({ dailyStockData, marketOpen, ticker }) => {
+  const lineColor = marketOpen ? "green" : "red";
+
   useEffect(() => {
     if (!dailyStockData) return;
 
@@ -14,23 +15,28 @@ const StockChart1 = ({ dailyStockData }) => {
       chart: {
         type: "line",
         zoomType: "x",
+        backgroundColor: "#f0f0f0", // Grey background
       },
       title: {
-        text: "AAPL Hourly Price Variation",
-        align: "left",
+        text: ticker + " Hourly Price Variation",
+        align: "center",
       },
       xAxis: {
         type: "datetime",
-        tickInterval: 3600 * 1000,
+        tickInterval: (24 / 8) * 3600 * 1000, // Aim for around 6 intervals
         labels: {
           format: "{value:%H:%M}",
         },
         crosshair: true,
+        gridLineWidth: 1, // Adjust grid line width as needed
       },
       yAxis: {
         title: {
-          text: "Stock Price (USD)",
+          text: "", // Remove Y-axis title
         },
+        opposite: true, // Move Y-axis to the right
+        gridLineColor: "#707073", // Darker grid lines for Y-axis
+        gridLineWidth: 1, // Adjust grid line width as needed
       },
       tooltip: {
         shared: true,
@@ -45,7 +51,7 @@ const StockChart1 = ({ dailyStockData }) => {
             enabled: false,
           },
           lineWidth: 3,
-          color: "#FF0000",
+          color: lineColor,
         },
       },
       series: [

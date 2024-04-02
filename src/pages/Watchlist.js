@@ -61,21 +61,29 @@ const Watchlist = () => {
       {stocks.map((stock, index) => (
         <div className="stock-item" key={index}>
           <span className="stock-name">
-            {stock.ticker} - {stock.name}
-          </span>
-          <span>
-            <span className={getPriceChangeClass(stock.priceChange)}>
-              ${stock.currentPrice.toFixed(2)}
-              {stock.priceChange >= 0 ? "▲" : "▼"}
-              {Math.abs(stock.priceChange).toFixed(2)}(
-              {Math.abs(stock.percentChange).toFixed(2)}%)
-            </span>
             <button
               className="delete-button"
               onClick={() => handleDelete(stock.ticker)}
             >
               x
             </button>
+            {""}
+            <br></br>
+            <br></br>
+            <div className="stock-ticker">{stock.ticker}</div> {stock.name}
+          </span>
+          <span className="Right-Prices">
+            <span className={getPriceChangeClass(stock.priceChange)}>
+              <br></br>
+              <div className="stock-prices">
+                {stock.currentPrice.toFixed(2)}
+              </div>
+              {stock.priceChange >= 0 ? "▲" : "▼"}
+              {stock.priceChange < 0 ? "-" : ""}
+              {Math.abs(stock.priceChange).toFixed(2)}(
+              {stock.priceChange < 0 ? "-" : ""}
+              {Math.abs(stock.percentChange).toFixed(2)}%)
+            </span>
           </span>
         </div>
       ))}

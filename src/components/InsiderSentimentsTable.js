@@ -38,32 +38,56 @@ const InsiderSentimentsTable = ({ insiderInsights }) => {
     0
   );
 
+  const tableStyle = {
+    width: "100%",
+    textAlign: "center",
+    borderLeft: "none",
+    borderTop: "none",
+    borderRight: "none",
+  };
+
+  const thTdStyle = {
+    backgroundColor: "white",
+    textAlign: "center",
+    borderBottom: "1px solid #ddd",
+    borderLeft: "none",
+    borderRight: "none",
+    borderTop: "none",
+    padding: "8px",
+  };
+
   return (
     <div>
-      <h2>Insider Sentiments</h2>
-      <table>
+      <h2 style={{ textAlign: "center" }}>Insider Sentiments</h2>
+      <table style={tableStyle}>
         <thead>
           <tr>
-            <th>{insiderInsights.symbol}</th>
-            <th>MSPR</th>
-            <th>Change</th>
+            <th style={thTdStyle}>{insiderInsights.symbol}</th>
+            <th style={thTdStyle}>MSPR</th>
+            <th style={thTdStyle}>Change</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Total</td>
-            <td>{totalMspr.toFixed(2)}</td>
-            <td>{totalChange}</td>
+            <td style={thTdStyle}>
+              <strong>Total</strong>
+            </td>
+            <td style={thTdStyle}>{totalMspr.toFixed(2)}</td>
+            <td style={thTdStyle}>{totalChange}</td>
           </tr>
           <tr>
-            <td>Positive</td>
-            <td>{totalPositiveMspr.toFixed(2)}</td>
-            <td>{totalPositiveChange}</td>
+            <td style={thTdStyle}>
+              <strong>Positive</strong>
+            </td>
+            <td style={thTdStyle}>{totalPositiveMspr.toFixed(2)}</td>
+            <td style={thTdStyle}>{totalPositiveChange}</td>
           </tr>
           <tr>
-            <td>Negative</td>
-            <td>{totalNegativeMspr.toFixed(2)}</td>
-            <td>{totalNegativeChange}</td>
+            <td style={thTdStyle}>
+              <strong>Negative</strong>
+            </td>
+            <td style={thTdStyle}>{totalNegativeMspr.toFixed(2)}</td>
+            <td style={thTdStyle}>{totalNegativeChange}</td>
           </tr>
         </tbody>
       </table>

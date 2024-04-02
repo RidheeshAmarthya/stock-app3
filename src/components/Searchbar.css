@@ -1,16 +1,3 @@
-/* Searchbar.css */
-.searchbar-container {
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  border: 2px solid #1d279d; /* Added colored border */
-}
-
 .search-input {
   flex: 1;
   border: none;
@@ -64,10 +51,108 @@
 }
 
 .suggestions-dropdown {
+  position: absolute;
+  margin: 0 auto;
   overflow-y: auto;
   border: 1px solid #eee;
   border-top: none;
   border-radius: 0 0 4px 4px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  left: 50%; /* Start at the center */
+  transform: translateX(-50%); /* Pull back to center the dropdown */
+  width: 400px;
+  z-index: 1000; /* Ensure it sits above other content */
+}
+
+/* Searchbar.css */
+.searchbar-container {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  position: relative;
+
+  border: 4px solid #1d279d; /* Added colored border */
+}
+
+.search-button img {
+  width: 20px; /* Adjust based on your preference */
+  height: 20px; /* Adjust based on your preference */
+  padding-right: 10px;
+}
+
+.clear-button img {
+  width: 18x; /* Adjust based on your preference */
+  height: 18px; /* Adjust based on your preference */
+  padding-right: 20px;
+}
+
+/* You may want to adjust the button padding to ensure the icons are centered */
+.search-button,
+.clear-button {
+  color: #1d279d;
+  padding: 5px; /* Adjust based on your preference */
+}
+
+.current-price.positive {
+  color: #2ecc71; /* Change to your preferred color for price increase */
+}
+
+.current-price.negative {
+  color: red; /* Change to your preferred color for price decrease */
+}
+
+.price-change.positive {
+  color: #2ecc71; /* Adjust if needed */
+}
+
+.price-change.negative {
+  color: red; /* Adjust if needed */
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 40px; /* Reduced from 80px */
+  height: 40px; /* Reduced from 80px */
+  color: #1d279d;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 30px; /* Reduced from 64px */
+  height: 30px; /* Reduced from 64px */
+  margin: 4px; /* Reduced from 8px */
+  border: 4px solid currentColor; /* Reduced from 8px */
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: currentColor transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
