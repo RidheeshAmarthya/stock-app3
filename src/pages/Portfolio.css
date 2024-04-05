@@ -1,6 +1,6 @@
 /* Portfolio.css */
 .portfolio-container {
-  max-width: 600px;
+  max-width: 80%;
   margin: 0 auto;
   font-family: "Arial", sans-serif;
 }
@@ -9,8 +9,24 @@
   text-align: left;
 }
 
+.empty-portfolio-message {
+  background-color: #fff0c8;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
 .wallet-balance {
   text-align: left;
+}
+
+.stock-stuff .positive-change {
+  color: green;
+}
+
+.stock-stuff .negative-change {
+  color: red;
 }
 
 .stock-card {

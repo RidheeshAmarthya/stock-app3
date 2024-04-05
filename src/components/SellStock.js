@@ -10,7 +10,9 @@ const SellStock = ({
   setPortfolio,
   ticker,
   currentPrice,
-  onUpdatePortfolio, // Optional callback function to update the state in the parent component
+  onUpdatePortfolio,
+  setTagMessage,
+  setIsTagVisible, // Optional callback function to update the state in the parent component
 }) => {
   const [quantity, setQuantity] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,11 +48,28 @@ const SellStock = ({
           totalcost: newTotalCost,
         };
         updatedPortfolio[stockIndex] = updatedStock;
-        await axios.patch(`/portfolio/${ticker}`, updatedStock);
+        await axios.patch(
+          `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/portfolio/${ticker}`,
+          updatedStock
+        );
+        setTagMessage({
+          text: "Stock sold successfully!",
+          type: "error",
+        });
+        setIsTagVisible(true);
+        setIsModalOpen(false); // Close the modal
       } else {
         // If no stock remains, remove it from the portfolio and call delete API
         updatedPortfolio.splice(stockIndex, 1);
-        await axios.delete(`/DeleteFromPortfolio/${ticker}`);
+        await axios.delete(
+          `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/DeleteFromPortfolio/${ticker}`
+        );
+        setTagMessage({
+          text: "Stock sold successfully!",
+          type: "error",
+        });
+        setIsTagVisible(true);
+        setIsModalOpen(false); // Close the modal
       }
 
       // Update the wallet balance
@@ -63,9 +82,12 @@ const SellStock = ({
       }
 
       // Update the wallet balance on the server
-      await axios.patch("/balance/66066e225c4da4de1832cc40", {
-        balance: newWalletBalance,
-      });
+      await axios.patch(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/balance/66066e225c4da4de1832cc40",
+        {
+          balance: newWalletBalance,
+        }
+      );
 
       setIsModalOpen(false); // Close the modal after successful sale
     } catch (error) {
@@ -74,6 +96,9 @@ const SellStock = ({
     }
   };
 
+  const ownedQuantity =
+    portfolio.find((stock) => stock.ticker === ticker)?.quantity || 0;
+
   return (
     <>
       <button className="sell-button" onClick={() => setIsModalOpen(true)}>
@@ -81,17 +106,40 @@ const SellStock = ({
       </button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div>
-          <h2>Sell {ticker}</h2>
-          <p>Current Price: ${currentPrice.toFixed(2)}</p>
-          <p>Money in Wallet: ${wallet.toFixed(2)}</p>
+          <h2>{ticker}</h2>
+          <hr></hr>
+          <p>Current Price: {currentPrice.toFixed(2)}</p>
+          <p>Money in Wallet: {wallet.toFixed(2)}</p>
           <input
             type="number"
             value={quantity}
             min="1"
             onChange={(e) => setQuantity(Number(e.target.value))}
           />
-          <button onClick={handleSell}>Confirm Sale</button>
+          <hr></hr>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <button
+              className="sell-buttonM"
+              onClick={handleSell}
+              disabled={quantity > ownedQuantity}
+              style={{
+                opacity: quantity > ownedQuantity ? 0.5 : 1,
+              }}
+            >
+              Confirm Sale
+            </button>
+            <p>Total: {(currentPrice * quantity).toFixed(2)}</p>
+          </div>
         </div>
+        {quantity > ownedQuantity && (
+          <p style={{ color: "red" }}>Not enough stock to sell.</p>
+        )}
       </Modal>
     </>
   );

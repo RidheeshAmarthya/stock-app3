@@ -6,10 +6,21 @@ h1 {
   text-align: center;
 }
 
+.stock-details {
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
 /* Search.css */
 .stock-search-container {
   text-align: center;
   font-family: Arial, sans-serif;
+}
+
+.insider-insights {
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1000px; /* Adjust as needed */
 }
 
 .stock-search-container h1 {
@@ -76,13 +87,25 @@ h1 {
   margin-top: 20px;
 }
 
+.Share-buttons {
+  display: flex;
+  justify-content: left;
+}
+
 .stock-buttons {
   display: flex;
   justify-content: center;
   .stock-buttons {
     display: flex;
     justify-content: center;
-    padding: 20px;
+  }
+
+  .button-disabled {
+    opacity: 0.5;
+  }
+
+  .error-message {
+    color: red;
   }
 
   .buy-buttonM {
@@ -93,20 +116,7 @@ h1 {
     background-color: #19784b;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-right: 10px; /* Adds space to the right of the buy button */
   }
-
-  .sell-buttonM {
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    background-color: #d22d3c;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    /* Optionally, add margin-left here if needed for further adjustment */
-  }
-
   /* Adjustments for responsiveness can be made as needed */
   /* ... (rest of your CSS) */
 }
@@ -119,6 +129,7 @@ h1 {
   background-color: #19784b;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 5px; /* Add a right margin to create a gap */
 }
 
 .sell-buttonM {
@@ -129,6 +140,7 @@ h1 {
   background-color: #d22d3c;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  /* Optionally, add margin-left here if needed for further adjustment */
 }
 
 /* Adjustments for responsiveness can be made as needed */
@@ -161,31 +173,84 @@ h1 {
 
 /* Add this to your Search.css */
 
-.tabs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  background: #ffffff;
-  box-shadow: 0 4px 2px -2px gray;
+/* Enhanced Tab Styles */
+
+.tab-container {
+  display: inline-flex; /* Allows the container to grow as wide as it needs to without breaking to a new line */
+  flex-wrap: nowrap; /* Prevents the tabs from wrapping */
+  justify-content: center; /* Center-aligns the tabs */
 }
 
 .tab {
+  display: inline-flex; /* Uses flexbox for center alignment and flexibility */
+  justify-content: center; /* Ensures the text within each tab is centered */
+  align-items: center;
   padding: 10px 20px;
-  margin: 0;
   border: none;
   background: none;
   font-size: 1em;
   color: #555;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 500;
 }
+
+.tabs {
+  display: flex;
+  flex-wrap: nowrap; /* Prevents the tabs from wrapping */
+  justify-content: center; /* Center-aligns tabs when they fit in the container */
+  align-items: center;
+  margin-top: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-x: auto; /* Allows horizontal scrolling */
+  overflow-y: hidden; /* Prevents vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+}
+
+/* Apply the same styles for .tab:hover, .tab.active, .tab:not(:last-child) as before */
 
 .tab:hover,
 .tab.active {
   background-color: #f0f0f0;
   color: #000;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 3px solid #007bff; /* Thicker bottom border for a pronounced effect */
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2); /* Subtle shadow for lifted effect on hover/active */
+}
+
+.tab:not(:last-child) {
+  border-right: 1px solid #ddd; /* Separator between tabs */
+}
+
+/* Smooth transition for background color and shadow on hover/active */
+.tab:hover {
+  background-color: #e7e7e7; /* Slightly darker shade on hover for a tactile feel */
+}
+
+.tab.active {
+  background-color: #dee2e6; /* Even darker for the active state to stand out */
+  box-shadow: none; /* Removing shadow on active state for a "pressed" effect */
+}
+
+/* Adding a hover effect to encourage interactivity */
+.tab:hover {
+  transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+/* Ensuring active tab stands out without the raised effect */
+.tab.active {
+  transform: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15); /* Inner shadow to mimic inset effect */
+}
+
+/* Optional: Adding a smooth transition for the transform property for a soft effect */
+.tab {
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
 }
 
 .tab:not(:last-child) {
@@ -194,12 +259,17 @@ h1 {
 
 .tab-content {
   padding: 20px;
+  padding-left: 250px;
+  padding-right: 250px;
+
   border-top: none;
 }
 
 .news-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  grid-auto-rows: minmax(100px, auto);
 }
 
 /* ... (rest of your CSS) */
@@ -232,9 +302,20 @@ h1 {
   padding: 0.5em;
 }
 
+.Share-box {
+  border: 2px solid #000;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .news-item {
-  padding: "10px";
-  grid-template-columns: "1fr 1fr";
+  display: flex;
+  font-size: 14px;
+  margin: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
 }
 
 .highcharts-data-table td,
@@ -332,7 +413,55 @@ th {
   grid-column: 2 / 3; /* Ensure it's in the second column */
 }
 
-@media (max-width: 768px) {
+.alert-message {
+  background-color: rgba(
+    25,
+    136,
+    25,
+    0.7
+  ); /* Semi-transparent red background */
+  border-radius: 5px; /* Rounded corners */
+  color: white; /* White text color */
+  padding: 20px; /* Padding inside the box */
+  width: 500px; /* Fixed width */
+  margin: 0 auto; /* Center the box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center the text */
+  position: relative;
+}
+
+.alert-message.success {
+  background-color: #4caf50; /* Green */
+}
+
+.alert-message.error {
+  background-color: #f44336; /* Red */
+}
+
+.alert-message .close-button {
+  position: absolute; /* Position the button absolutely within the .alert-message */
+
+  cursor: pointer;
+  padding: 0 8px;
+  color: inherit;
+  font-size: 1.2em;
+  border: none;
+  background-color: transparent;
+  top: 0;
+  right: 0;
+}
+.stock-details h2 {
+  font-size: 18px; /* Adjust the font size of headings */
+}
+
+.image-view {
+  width: "150px";
+  height: "100px";
+  border-radius: "5px";
+  margin-right: "20px";
+}
+
+@media (max-width: 1200px) {
   .summary-grid {
     grid-template-columns: 1fr; /* Single column layout on smaller screens */
     grid-template-rows: auto auto auto; /* Three rows for each section */
@@ -353,11 +482,82 @@ th {
     grid-column: 1 / 2; /* Ensure it spans the full width */
   }
 
-  /* Additional adjustments can be made as needed */
-  .news-item {
-    display: grid;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+  .alert-message {
+    background-color: rgba(
+      25,
+      136,
+      25,
+      0.7
+    ); /* Semi-transparent red background */
+    border-radius: 5px; /* Rounded corners */
+    color: white; /* White text color */
+    padding: 20px; /* Padding inside the box */
+    width: 300px; /* Fixed width */
+    margin: 0 auto; /* Center the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center the text */
+  }
+
+  .news-container {
+    grid-template-columns: 1fr; /* Changes to a single column layout on mobile devices */
+  }
+  .tab-content {
+    padding: 20px;
+
+    border-top: none;
+  }
+
+  .stock-logo-center img {
+    max-width: 50px; /* Set a maximum width for the image */
+    max-height: 50px; /* Set a maximum height for the image */
+    width: auto; /* Keep the image's aspect ratio */
+    height: auto; /* Keep the image's aspect ratio */
+  }
+
+  .current-price {
+    font-size: 25px;
+    color: #333;
+    margin: 0;
+  }
+
+  .stock-info-right {
+    align-items: center;
+  }
+
+  .stock-info-left {
+    align-items: center;
+  }
+
+  .stock-details {
+    font-size: 11px; /* Adjust the font size as needed */
+    margin-top: 2px;
+    padding: 5px;
+  }
+
+  .price-change {
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .stock-exchange {
+    color: #999;
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  .Prices {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .charts {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .chartI {
+    padding-right: 5px;
   }
 }

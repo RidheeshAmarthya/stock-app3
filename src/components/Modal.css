@@ -13,6 +13,11 @@
 }
 
 .modal-content {
+  width: 370px; /* Adjust width to match the screenshot */
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff;
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
@@ -31,7 +36,7 @@
   font-size: 1.5em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .modal-content {
     background-color: #fff;
 

@@ -8,38 +8,132 @@ const Portfolio = () => {
   const [wallet, setWallet] = useState(0);
   const [portfolio, setPortfolio] = useState([]);
   const token = "co2aripr01qvggedvg6gco2aripr01qvggedvg70"; // Replace with your actual API token
+  const [isTagVisible, setIsTagVisible] = useState(false);
+  const [tagMessage, setTagMessage] = useState({ text: "", type: "" });
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading status
 
   useEffect(() => {
-    const getWalletBalance = async () => {
-      const response = await axios.get("/Balance");
-      setWallet(response.data[0]);
+    const fetchWalletAndPortfolio = async () => {
+      setIsLoading(true);
+      const walletResponse = await axios.get(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/Balance"
+      );
+      setWallet(walletResponse.data[0]);
+
+      const portfolioResponse = await axios.get(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/portfolio"
+      );
+      const portfolioData = portfolioResponse.data;
+
+      // Use Promise.all to fetch stock details concurrently
+      const stockDetails = await Promise.all(
+        portfolioData.map(async (stock) => {
+          const [quoteResponse, profileResponse] = await Promise.all([
+            axios.get(
+              `https://finnhub.io/api/v1/quote?symbol=${stock.ticker}&token=${token}`
+            ),
+            axios.get(
+              `https://finnhub.io/api/v1/stock/profile2?symbol=${stock.ticker}&token=${token}`
+            ),
+          ]);
+          return {
+            ...stock,
+            currentPrice: quoteResponse.data.c,
+            change: quoteResponse.data.c - stock.totalcost / stock.quantity,
+            marketValue: quoteResponse.data.c * stock.quantity,
+            name: profileResponse.data.name,
+          };
+        })
+      );
+
+      setPortfolio(stockDetails);
+      setIsLoading(false); // Only set loading to false after all data is fetched
     };
 
-    const getPortfolio = async () => {
-      const response = await axios.get("/portfolio");
-      const portfolioData = response.data;
-      for (const stock of portfolioData) {
-        const quoteResponse = await axios.get(
-          `https://finnhub.io/api/v1/quote?symbol=${stock.ticker}&token=${token}`
-        );
-        const profileResponse = await axios.get(
-          `https://finnhub.io/api/v1/stock/profile2?symbol=${stock.ticker}&token=${token}`
-        );
-        stock.currentPrice = quoteResponse.data.c;
-        stock.change = quoteResponse.data.c - stock.totalcost / stock.quantity;
-        stock.marketValue = quoteResponse.data.c * stock.quantity;
-        stock.name = profileResponse.data.name;
-      }
-      setPortfolio(portfolioData);
-    };
-
-    getWalletBalance();
-    getPortfolio();
+    fetchWalletAndPortfolio();
   }, []);
+
+  useEffect(() => {
+    let timer;
+    if (isTagVisible) {
+      timer = setTimeout(() => {
+        setIsTagVisible(false);
+      }, 3000); // Adjust the delay as needed
+    }
+
+    // Cleanup function to clear the timer if the component unmounts
+    // or if the alert visibility changes before the timer completes.
+    return () => clearTimeout(timer);
+  }, [isTagVisible]);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "20vh",
+        }}
+      >
+        <div className="loading-container">
+          {/* Your loading animation here */}
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Add this condition before the return statement
+  if (portfolio.length === 0) {
+    return (
+      <div className="portfolio-container">
+        <br></br>
+        {isTagVisible && (
+          <div className={`alert-message ${tagMessage.type}`}>
+            {tagMessage.text}
+            <button
+              className="close-button"
+              onClick={() => setIsTagVisible(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+          </div>
+        )}
+        <br></br>
+        <h2>My Portfolio</h2>
+        <div className="wallet-balance">
+          <p>Money in Wallet: ${wallet.toFixed(2)}</p>
+        </div>
+        <br></br>
+        <div className="empty-portfolio-message">
+          <p>Currently you don't have any stock.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="portfolio-container">
       <h2>My Portfolio</h2>
+      {isTagVisible && (
+        <div className={`alert-message ${tagMessage.type}`}>
+          {tagMessage.text}
+          <button
+            className="close-button"
+            onClick={() => setIsTagVisible(false)}
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+      )}
       <div className="wallet-balance">
         <p>Money in Wallet: ${wallet.toFixed(2)}</p>
       </div>
@@ -59,11 +153,43 @@ const Portfolio = () => {
             </div>
             <div>
               <p className="label">Change:</p>
-              <p>{stock.change.toFixed(2)}</p>
+              <p
+                className={`${
+                  stock.change < 0
+                    ? "negative-change"
+                    : stock.change > 0
+                    ? "positive-change"
+                    : ""
+                }`}
+              >
+                {stock.change < 0 ? "▼" : stock.change > 0 ? "▲" : ""}
+                {stock.change.toFixed(2)}
+              </p>
               <p className="label">Current Price:</p>
-              <p>{stock.currentPrice.toFixed(2)}</p>
+              <p
+                className={`${
+                  stock.change < 0
+                    ? "negative-change"
+                    : stock.change > 0
+                    ? "positive-change"
+                    : ""
+                }`}
+              >
+                {stock.currentPrice.toFixed(2)}
+              </p>
+
               <p className="label">Market Value:</p>
-              <p>{stock.marketValue.toFixed(2)}</p>
+              <p
+                className={`${
+                  stock.change < 0
+                    ? "negative-change"
+                    : stock.change > 0
+                    ? "positive-change"
+                    : ""
+                }`}
+              >
+                {stock.marketValue.toFixed(2)}
+              </p>
             </div>
           </div>
           <div className="buy-sell-buttons">
@@ -76,6 +202,8 @@ const Portfolio = () => {
                 setPortfolio={setPortfolio}
                 ticker={stock.ticker}
                 currentPrice={stock.currentPrice}
+                setTagMessage={setTagMessage}
+                setIsTagVisible={setIsTagVisible}
               />
             </div>
             <div>
@@ -87,6 +215,8 @@ const Portfolio = () => {
                 setPortfolio={setPortfolio}
                 ticker={stock.ticker}
                 currentPrice={stock.currentPrice}
+                setTagMessage={setTagMessage}
+                setIsTagVisible={setIsTagVisible}
               />
             </div>
           </div>

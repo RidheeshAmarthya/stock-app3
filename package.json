@@ -1,7 +1,7 @@
 {
   "name": "stock-app3",
   "version": "0.1.0",
-  "proxy": "http://localhost:3001/",
+  "proxy": "https://stock-app3-backend-obu6dw52ya-wm.a.run.app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
+    "eslint-plugin-react-hooks": "^5.1.0-canary-95e6f032c-20240401",
     "finnhub": "^1.2.18",
     "highcharts": "^11.4.0",
     "highcharts-react-official": "^3.2.1",

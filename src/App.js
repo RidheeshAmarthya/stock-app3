@@ -9,27 +9,6 @@ import Footer from "./pages/footer"; // Import the Footer component
 
 function App() {
   const [stockSymbol, setStockSymbol] = useState("");
-  const [balance, setBalance] = useState([{}]);
-
-  useEffect(() => {
-    // Fetch balance data only once when the component mounts
-    const fetchBalanceData = async () => {
-      try {
-        const response = await fetch("/balance");
-        if (response.headers.get("content-type").includes("application/json")) {
-          const data = await response.json();
-          setBalance(data);
-          console.log("Success:", balance);
-        } else {
-          throw new Error("Not JSON response");
-        }
-      } catch (error) {
-        console.error("Error fetching balance data:", error);
-      }
-    };
-
-    fetchBalanceData();
-  }, []); // Empty dependency array ensures this effect runs only once
 
   const handleStockSearch = (symbol) => {
     console.log("User searched for stock symbol:", symbol);
@@ -42,21 +21,26 @@ function App() {
         <div className="App">
           <Navbar />
           <Routes>
+            {/* Set the Search page as the landing page */}
+            <Route path="/" element={<Search onSearch={handleStockSearch} />} />
+
+            {/* Include dynamic ticker path for Search */}
+            <Route
+              path="/search/:ticker"
+              element={<Search onSearch={handleStockSearch} />}
+            />
+
+            {/* Other paths */}
             <Route path="/portfolio" element={<Portfolio />} />
             <Route
               path="/watchlist"
               element={<Watchlist key={window.location.pathname} />}
             />
-            {/* Update the Search Route to include dynamic ticker */}
-            <Route
-              path="/search"
-              element={<Search onSearch={handleStockSearch} />}
-            />
-            <Route
-              path="/search/:ticker"
-              element={<Search onSearch={handleStockSearch} />}
-            />
+
+            {/* Redirect any unrecognized path to Search */}
+            <Route path="*" element={<Search onSearch={handleStockSearch} />} />
           </Routes>
+
           <Footer />
         </div>
       </StockDataProvider>

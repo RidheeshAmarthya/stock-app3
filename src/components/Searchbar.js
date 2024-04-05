@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Searchbar.css";
-// Import SVG icons
 import searchIcon from "../assets/search.svg"; // Adjust the path as necessary
 import crossIcon from "../assets/cross.svg"; // Adjust the path as necessary
 
@@ -58,7 +57,8 @@ const Searchbar = ({ onSearch }) => {
   }, [symbol]);
 
   const handleSearch = () => {
-    navigate(`/search/${symbol}`);
+    setSuggestions([]); // Clear suggestions to ensure the box closes
+    navigate(`/search/${symbol.toUpperCase()}`);
   };
 
   const handleClear = () => {
@@ -78,6 +78,7 @@ const Searchbar = ({ onSearch }) => {
   // Added to handle Enter key press
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
+      setSuggestions([]); // Clear suggestions to ensure the box closes
       handleSearch();
     }
   };
@@ -100,32 +101,33 @@ const Searchbar = ({ onSearch }) => {
           <img src={crossIcon} alt="Clear" />
         </button>
       </div>
-
-      <div className="suggestions-dropdown" ref={dropdownRef}>
-        {isLoading ? (
-          <div className="lds-ring">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        ) : (
-          suggestions.length > 0 && (
-            <li className="suggestions-list">
-              {suggestions.map((suggestion, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleSuggestionClick(suggestion.symbol)}
-                  className="suggestion-item"
-                >
-                  <div className="ticker">{suggestion.symbol}</div>
-                  <div className="description">{suggestion.description}</div>
-                </li>
-              ))}
-            </li>
-          )
-        )}
-      </div>
+      {
+        <div className="suggestions-dropdown" ref={dropdownRef}>
+          {isLoading ? (
+            <div className="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : (
+            suggestions.length > 0 && (
+              <li className="suggestions-list">
+                {suggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion.symbol)}
+                    className="suggestion-item"
+                  >
+                    <div className="ticker">{suggestion.symbol}</div>
+                    <div className="description">{suggestion.description}</div>
+                  </li>
+                ))}
+              </li>
+            )
+          )}
+        </div>
+      }
     </div>
   );
 };

@@ -12,351 +12,6 @@ import axios from "axios";
 import { useStockData } from "./Context"; // Import the context hook
 import { Link } from "react-router-dom";
 import img from "../assets/alt-img.jpg";
-import xLogo from "../assets/X-Logo.png";
-import facebookLogo from "../assets/facebook-Logo.png";
-
-const stockChartData = {
-  ticker: "AAPL",
-  queryCount: 757,
-  resultsCount: 16,
-  adjusted: true,
-  results: [
-    {
-      v: 25841,
-      vw: 169.945,
-      o: 170,
-      c: 169.99,
-      h: 170.12,
-      l: 169.7,
-      t: 1711526400000,
-      n: 869,
-    },
-    {
-      v: 9083,
-      vw: 170.142,
-      o: 170.07,
-      c: 170.15,
-      h: 170.2,
-      l: 170.07,
-      t: 1711530000000,
-      n: 275,
-    },
-    {
-      v: 30581,
-      vw: 170.4913,
-      o: 170.22,
-      c: 170.44,
-      h: 170.61,
-      l: 170.16,
-      t: 1711533600000,
-      n: 666,
-    },
-    {
-      v: 42993,
-      vw: 170.425,
-      o: 170.5,
-      c: 170.5,
-      h: 170.55,
-      l: 170.28,
-      t: 1711537200000,
-      n: 1192,
-    },
-    {
-      v: 180245,
-      vw: 170.3117,
-      o: 170.238,
-      c: 170.7787,
-      h: 170.86,
-      l: 169.96,
-      t: 1711540800000,
-      n: 5219,
-    },
-    {
-      v: 9.392838e6,
-      vw: 171.6236,
-      o: 170.75,
-      c: 172.7152,
-      h: 172.88,
-      l: 170.11,
-      t: 1711544400000,
-      n: 97645,
-    },
-    {
-      v: 9.455644e6,
-      vw: 172.4079,
-      o: 172.72,
-      c: 172.455,
-      h: 173.12,
-      l: 171.94,
-      t: 1711548000000,
-      n: 115616,
-    },
-    {
-      v: 5.225302e6,
-      vw: 172.5128,
-      o: 172.44,
-      c: 172.06,
-      h: 172.76,
-      l: 172.05,
-      t: 1711551600000,
-      n: 109390,
-    },
-    {
-      v: 4.148534e6,
-      vw: 172.1325,
-      o: 172.07,
-      c: 172.165,
-      h: 172.3499,
-      l: 171.86,
-      t: 1711555200000,
-      n: 122787,
-    },
-    {
-      v: 3.389431e6,
-      vw: 172.2572,
-      o: 172.17,
-      c: 172.288,
-      h: 172.49,
-      l: 172,
-      t: 1711558800000,
-      n: 42957,
-    },
-    {
-      v: 4.337171e6,
-      vw: 172.5431,
-      o: 172.28,
-      c: 172.7,
-      h: 172.82,
-      l: 172.23,
-      t: 1711562400000,
-      n: 47601,
-    },
-    {
-      v: 1.1946021e7,
-      vw: 173.1243,
-      o: 172.7,
-      c: 173.41,
-      h: 173.6,
-      l: 172.62,
-      t: 1711566000000,
-      n: 118075,
-    },
-    {
-      v: 2.678293e6,
-      vw: 173.3152,
-      o: 173.33,
-      c: 173.15,
-      h: 173.69,
-      l: 173.09,
-      t: 1711569600000,
-      n: 2946,
-    },
-    {
-      v: 47750,
-      vw: 173.1071,
-      o: 173.12,
-      c: 173.09,
-      h: 173.25,
-      l: 173.01,
-      t: 1711573200000,
-      n: 890,
-    },
-    {
-      v: 63761,
-      vw: 173.0117,
-      o: 173.08,
-      c: 172.93,
-      h: 173.31,
-      l: 172.88,
-      t: 1711576800000,
-      n: 1053,
-    },
-    {
-      v: 26897,
-      vw: 172.9262,
-      o: 172.89,
-      c: 172.9,
-      h: 173,
-      l: 172.87,
-      t: 1711580400000,
-      n: 659,
-    },
-  ],
-  status: "OK",
-  request_id: "4413d82dd947c221c9c5a4d06d9e62fd",
-  count: 16,
-};
-const historicalStockData = {
-  ticker: "AAPL",
-  queryCount: 757,
-  resultsCount: 16,
-  adjusted: true,
-  results: [
-    {
-      v: 25841,
-      vw: 169.945,
-      o: 170,
-      c: 169.99,
-      h: 170.12,
-      l: 169.7,
-      t: 1711526400000,
-      n: 869,
-    },
-    {
-      v: 9083,
-      vw: 170.142,
-      o: 170.07,
-      c: 170.15,
-      h: 170.2,
-      l: 170.07,
-      t: 1711530000000,
-      n: 275,
-    },
-    {
-      v: 30581,
-      vw: 170.4913,
-      o: 170.22,
-      c: 170.44,
-      h: 170.61,
-      l: 170.16,
-      t: 1711533600000,
-      n: 666,
-    },
-    {
-      v: 42993,
-      vw: 170.425,
-      o: 170.5,
-      c: 170.5,
-      h: 170.55,
-      l: 170.28,
-      t: 1711537200000,
-      n: 1192,
-    },
-    {
-      v: 180245,
-      vw: 170.3117,
-      o: 170.238,
-      c: 170.7787,
-      h: 170.86,
-      l: 169.96,
-      t: 1711540800000,
-      n: 5219,
-    },
-    {
-      v: 9.392838e6,
-      vw: 171.6236,
-      o: 170.75,
-      c: 172.7152,
-      h: 172.88,
-      l: 170.11,
-      t: 1711544400000,
-      n: 97645,
-    },
-    {
-      v: 9.455644e6,
-      vw: 172.4079,
-      o: 172.72,
-      c: 172.455,
-      h: 173.12,
-      l: 171.94,
-      t: 1711548000000,
-      n: 115616,
-    },
-    {
-      v: 5.225302e6,
-      vw: 172.5128,
-      o: 172.44,
-      c: 172.06,
-      h: 172.76,
-      l: 172.05,
-      t: 1711551600000,
-      n: 109390,
-    },
-    {
-      v: 4.148534e6,
-      vw: 172.1325,
-      o: 172.07,
-      c: 172.165,
-      h: 172.3499,
-      l: 171.86,
-      t: 1711555200000,
-      n: 122787,
-    },
-    {
-      v: 3.389431e6,
-      vw: 172.2572,
-      o: 172.17,
-      c: 172.288,
-      h: 172.49,
-      l: 172,
-      t: 1711558800000,
-      n: 42957,
-    },
-    {
-      v: 4.337171e6,
-      vw: 172.5431,
-      o: 172.28,
-      c: 172.7,
-      h: 172.82,
-      l: 172.23,
-      t: 1711562400000,
-      n: 47601,
-    },
-    {
-      v: 1.1946021e7,
-      vw: 173.1243,
-      o: 172.7,
-      c: 173.41,
-      h: 173.6,
-      l: 172.62,
-      t: 1711566000000,
-      n: 118075,
-    },
-    {
-      v: 2.678293e6,
-      vw: 173.3152,
-      o: 173.33,
-      c: 173.15,
-      h: 173.69,
-      l: 173.09,
-      t: 1711569600000,
-      n: 2946,
-    },
-    {
-      v: 47750,
-      vw: 173.1071,
-      o: 173.12,
-      c: 173.09,
-      h: 173.25,
-      l: 173.01,
-      t: 1711573200000,
-      n: 890,
-    },
-    {
-      v: 63761,
-      vw: 173.0117,
-      o: 173.08,
-      c: 172.93,
-      h: 173.31,
-      l: 172.88,
-      t: 1711576800000,
-      n: 1053,
-    },
-    {
-      v: 26897,
-      vw: 172.9262,
-      o: 172.89,
-      c: 172.9,
-      h: 173,
-      l: 172.87,
-      t: 1711580400000,
-      n: 659,
-    },
-  ],
-  status: "OK",
-  request_id: "4413d82dd947c221c9c5a4d06d9e62fd",
-  count: 16,
-};
 
 function getOffsetDate({ years = 0, months = 0, days = 0, hours = 0 }) {
   const currentDate = new Date();
@@ -381,7 +36,6 @@ const Tab = ({ id, title, activeTab, setActiveTab }) => (
     className={`tab ${activeTab === id ? "active" : ""}`}
     onClick={() => setActiveTab(id)}
     style={{
-      padding: "10px",
       cursor: "pointer",
       borderBottom: activeTab === id ? "2px solid blue" : "none",
     }}
@@ -399,7 +53,7 @@ console.log(tenDaysAgo);
 
 const Search = ({ onSearch }) => {
   const [stockCompanyInfo, setStockCompanyInfo] = useState(null);
-  const [stockInfo, setStockInfo] = useState(true);
+  const [stockInfo, setStockInfo] = useState(null);
   const [peers, setPeers] = useState([]);
   const [analysisData, setAnalysisData] = useState([]);
   const [earningsData, setEarningsData] = useState([]);
@@ -407,6 +61,10 @@ const Search = ({ onSearch }) => {
   const [news, setNews] = useState([]);
   const { ticker } = useParams();
   const { cacheStockData, getStockData } = useStockData(); // Use the context hook
+  const [searchAttempted, setSearchAttempted] = useState(false); // New state to track search attempts
+
+  const [tagMessage, setTagMessage] = useState({ text: "", type: "" });
+  const [isTagVisible, setIsTagVisible] = useState(false);
 
   //Retry API calls
   const fetchWithRetry = async (url, options, retries = 5, delay = 30000) => {
@@ -508,72 +166,102 @@ const Search = ({ onSearch }) => {
   const marketOpenCloseDisplay = marketStatus.isOpen ? (
     <p style={{ color: "green" }}>Market is Open</p>
   ) : (
-    <p style={{ color: "red" }}>
-      Market Closed on {marketStatus.lastOpenDate} 13:00:00
-    </p>
+    (() => {
+      // Convert lastOpenDate to a Date object
+      const date = new Date(marketStatus.lastOpenDate);
+      // Add one day
+      date.setDate(date.getDate() + 1);
+      // Convert back to string in YYYY-MM-DD format
+      const nextDay = date.toISOString().split("T")[0];
+
+      return (
+        <p style={{ color: "red" }}>Market Closed on {nextDay} 13:00:00</p>
+      );
+    })()
   );
-
-  // const API_KEY_POLYGON = "y9CbEJ1gYrXZpwAWpXbAJrAL1ziBkaV2";
   // const API_KEY_POLYGON = "QbUvKSfaomuQ26Fa3twUTwQUQQTQxZ1m";
-  // // Additional state for storing the stock chart data
-  // const [stockChartData, setStockChartData] = useState(null);
+  const API_KEY_POLYGON = "o8jrGJeU50mvmRBpDBRgntJcag7agVik";
+  const [isDailyDataLoading, setIsDailyDataLoading] = useState(false);
 
-  // // Helper function to fetch stock data for the chart
-  // const fetchStockChartData = async (startDate, endDate) => {
-  //   const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/hour/${startDate}/${endDate}?adjusted=true&sort=asc&limit=5000&apiKey=${API_KEY_POLYGON}`;
+  const [stockChartData, setStockChartData] = useState(null);
+  const fetchStockChartData = async () => {
+    setIsDailyDataLoading(true); // Start loading
 
-  //   try {
-  //     const data = await fetchWithRetry(url, {}, 5, 15000);
-  //     setStockChartData(data);
-  //   } catch (error) {
-  //     console.error("Error fetching stock chart data:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (!ticker || !marketStatus.lastOpenDate) return;
+    let endDate = new Date();
+    endDate.setDate(endDate.getDate() - 1); // Set to one day before the current date
 
-  //   // Determine the appropriate date range based on market status
-  //   let startDate, endDate;
-  //   if (marketStatus.isOpen) {
-  //     // Market is open, use the previous day for both start and end dates
-  //     const yesterday = new Date();
-  //     yesterday.setDate(yesterday.getDate() - 1);
-  //     startDate = endDate = yesterday.toISOString().split("T")[0];
-  //   } else {
-  //     // Market is closed, use the last open date and the day before it
-  //     const lastOpenDay = new Date(marketStatus.lastOpenDate);
-  //     const dayBeforeLastOpen = new Date(lastOpenDay);
-  //     dayBeforeLastOpen.setDate(lastOpenDay.getDate() - 1);
+    // Adjust for weekends (Saturday and Sunday)
+    // Note: getDay() returns 0 for Sunday and 6 for Saturday
+    if (endDate.getDay() === 0) {
+      // If it's Sunday
+      endDate.setDate(endDate.getDate() - 2); // Move to Friday
+    } else if (endDate.getDay() === 6) {
+      // If it's Saturday
+      endDate.setDate(endDate.getDate() - 1); // Move to Friday
+    }
 
-  //     startDate = dayBeforeLastOpen.toISOString().split("T")[0];
-  //     endDate = lastOpenDay.toISOString().split("T")[0];
-  //   }
+    // Now check if the adjusted end date is Friday and we need to fetch Thursday and Friday data
+    let startDate = new Date(endDate);
+    if (endDate.getDay() === 5) {
+      // If it's Friday
+      startDate.setDate(endDate.getDate() - 1); // Set start date to Thursday
+    } else {
+      startDate.setDate(endDate.getDate() - 1); // Regular case, just go one day back
+    }
 
-  //   fetchStockChartData(startDate, endDate);
-  // }, [ticker, marketStatus]);
-  // const [historicalStockData, setHistoricalStockData] = useState(null);
-  // const fetchHistoricalStockData = async () => {
-  //   const currentDate = new Date();
-  //   const twoYearsAgo = new Date(currentDate);
-  //   twoYearsAgo.setFullYear(currentDate.getFullYear() - 2);
+    // Handling for specific holidays would require checking the date against a list of holidays
+    // This part is not included in this snippet but should be considered for a complete solution
 
-  //   const startDate = twoYearsAgo.toISOString().split("T")[0];
-  //   const endDate = currentDate.toISOString().split("T")[0];
+    const startDateISO = startDate.toISOString().split("T")[0];
+    const endDateISO = endDate.toISOString().split("T")[0];
 
-  //   const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${startDate}/${endDate}?adjusted=true&sort=asc&limit=5000&apiKey=${API_KEY_POLYGON}`;
+    const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/hour/${startDateISO}/${endDateISO}?adjusted=true&sort=asc&limit=5000&apiKey=${API_KEY_POLYGON}`;
 
-  //   try {
-  //     const data = await fetchWithRetry(url, {}, 5, 15000);
-  //     setHistoricalStockData(data);
-  //   } catch (error) {
-  //     console.error("Error fetching historical stock data:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (!ticker) return;
+    try {
+      const response = await fetch(url); // Assuming fetchWithRetry is a wrapper for fetch that retries on failure
+      if (response.ok) {
+        const data = await response.json();
+        setStockChartData(data); // Assuming this sets the state in a React component
+        setIsDailyDataLoading(false); // Stop loading upon error
+      } else {
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error fetching historical stock data:", error);
+      setIsDailyDataLoading(false); // Stop loading upon error
+    }
+  };
 
-  //   fetchHistoricalStockData();
-  // }, [ticker]);
+  useEffect(() => {
+    if (!ticker) return;
+
+    fetchStockChartData();
+  }, [ticker]);
+
+  const [historicalStockData, setHistoricalStockData] = useState(null);
+  const fetchHistoricalStockData = async () => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1); // Set to one day before the current date
+
+    const twoYearsAgo = new Date(currentDate);
+    twoYearsAgo.setFullYear(currentDate.getFullYear() - 2);
+
+    const startDate = twoYearsAgo.toISOString().split("T")[0];
+    const endDate = currentDate.toISOString().split("T")[0];
+
+    const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${startDate}/${endDate}?adjusted=true&sort=asc&limit=5000&apiKey=${API_KEY_POLYGON}`;
+    try {
+      const data = await fetchWithRetry(url, {}, 5, 15000);
+      setHistoricalStockData(data);
+    } catch (error) {
+      console.error("Error fetching historical stock data:", error);
+    }
+  };
+  useEffect(() => {
+    if (!ticker) return;
+
+    fetchHistoricalStockData();
+  }, [ticker]);
   // Comment
 
   //Buy button
@@ -604,7 +292,10 @@ const Search = ({ onSearch }) => {
             quantity: portfolio[stockIndex].quantity + stockToBuy.quantity,
             totalcost: portfolio[stockIndex].totalcost + purchaseAmount,
           };
-          await axios.patch(`/portfolio/${stockToBuy.ticker}`, updatedStock);
+          await axios.patch(
+            `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/portfolio/${stockToBuy.ticker}`,
+            updatedStock
+          );
           updatedPortfolio[stockIndex] = updatedStock;
         } else {
           // Add new stock to portfolio if it doesn't exist
@@ -613,7 +304,10 @@ const Search = ({ onSearch }) => {
             quantity: stockToBuy.quantity,
             totalcost: purchaseAmount,
           };
-          await axios.post("/Createportfolio", newStock);
+          await axios.post(
+            "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/Createportfolio",
+            newStock
+          );
           updatedPortfolio.push(newStock);
         }
 
@@ -621,12 +315,20 @@ const Search = ({ onSearch }) => {
         setPortfolio(updatedPortfolio);
 
         // Update the wallet balance on the server
-        await axios.patch(`/balance/66066e225c4da4de1832cc40`, {
-          balance: updatedWalletBalance,
-        });
+        await axios.patch(
+          `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/balance/66066e225c4da4de1832cc40`,
+          {
+            balance: updatedWalletBalance,
+          }
+        );
 
         // Update local wallet state
         setWallet(updatedWalletBalance);
+        setTagMessage({
+          text: `Bought ${stockToBuy.quantity} shares of ${stockToBuy.ticker}`,
+          type: "success",
+        });
+        setIsTagVisible(true);
 
         // Close the buy modal
         setBuyModalOpen(false);
@@ -672,19 +374,27 @@ const Search = ({ onSearch }) => {
       try {
         if (updatedQuantity > 0) {
           // Update existing stock in portfolio
-          await axios.patch(`/portfolio/${stockToSell.ticker}`, {
-            quantity: updatedQuantity,
-            totalcost: updatedTotalCost,
-          });
+          await axios.patch(
+            `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/portfolio/${stockToSell.ticker}`,
+            {
+              quantity: updatedQuantity,
+              totalcost: updatedTotalCost,
+            }
+          );
         } else {
           // If no stocks left, remove the stock from the portfolio
-          await axios.delete(`/DeleteFromportfolio/${stockToSell.ticker}`);
+          await axios.delete(
+            `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/DeleteFromportfolio/${stockToSell.ticker}`
+          );
         }
 
         // Update wallet balance
-        await axios.patch(`/balance/66066e225c4da4de1832cc40`, {
-          balance: updatedWalletBalance,
-        });
+        await axios.patch(
+          `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/balance/66066e225c4da4de1832cc40`,
+          {
+            balance: updatedWalletBalance,
+          }
+        );
 
         // Update local state
         const updatedPortfolio = [...portfolio];
@@ -699,6 +409,12 @@ const Search = ({ onSearch }) => {
         }
         setPortfolio(updatedPortfolio);
         setWallet(updatedWalletBalance);
+        setTagMessage({
+          text: `Sold ${stockToSell.quantity} shares of ${stockToSell.ticker}`,
+          type: "error",
+        });
+        setIsTagVisible(true);
+
         setSellModalOpen(false); // Close the sell modal
       } catch (error) {
         console.error("Error during stock sale:", error);
@@ -712,7 +428,9 @@ const Search = ({ onSearch }) => {
   // Fetch watchlist and check if current ticker is in watchlist
   useEffect(() => {
     const fetchWatchlist = async () => {
-      const response = await fetch("/watchList");
+      const response = await fetch(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/watchList"
+      );
       const data = await response.json();
       const watchListTickers = data.map((item) => item.watchList);
       setIsInWatchlist(watchListTickers.includes(ticker));
@@ -729,12 +447,16 @@ const Search = ({ onSearch }) => {
   // Fetch wallet balance and portfolio data
   useEffect(() => {
     const getWalletBalance = async () => {
-      const response = await axios.get("/balance");
+      const response = await axios.get(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/balance"
+      );
       setWallet(response.data[0]);
     };
 
     const getPortfolio = async () => {
-      const response = await axios.get("/portfolio");
+      const response = await axios.get(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/portfolio"
+      );
       const portfolioData = response.data;
       setPortfolio(portfolioData);
     };
@@ -750,20 +472,32 @@ const Search = ({ onSearch }) => {
   const handleStarClick = async () => {
     if (isInWatchlist) {
       // Remove from watchlist
-      await fetch(`/DeletewatchList/${ticker}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `https://stock-app3-backend-obu6dw52ya-wm.a.run.app/DeletewatchList/${ticker}`,
+        {
+          method: "DELETE",
+        }
+      );
     } else {
       // Add to watchlist
-      await fetch("/CreatewatchList", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ watchList: ticker }),
-      });
+      await fetch(
+        "https://stock-app3-backend-obu6dw52ya-wm.a.run.app/CreatewatchList",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ watchList: ticker }),
+        }
+      );
     }
     setIsInWatchlist(!isInWatchlist); // Toggle watchlist status
+    const message = isInWatchlist
+      ? `Removed ${ticker} from watchlist`
+      : `Added ${ticker} to watchlist`;
+    const type = isInWatchlist ? "error" : "success";
+    setTagMessage({ text: message, type: type });
+    setIsTagVisible(true);
   };
 
   //API CALLS
@@ -837,6 +571,7 @@ const Search = ({ onSearch }) => {
           setNews(newsData);
 
           setIsLoading(false); // End loading because we're using cached data
+          setSearchAttempted(true); // Update the state to reflect that a search has been attempted
         } catch (error) {
           console.error("Error fetching data:", error);
           setIsLoading(false); // Ensure loading ends even if there's an error
@@ -915,7 +650,7 @@ const Search = ({ onSearch }) => {
       setCurrentTime(formatted);
     };
 
-    const intervalId = setInterval(updateRightTabContents, 1500000); //Change this to 15k
+    const intervalId = setInterval(updateRightTabContents, 15000); //Change this to 15k
 
     // Cleanup on component unmount
     return () => clearInterval(intervalId);
@@ -936,79 +671,26 @@ const Search = ({ onSearch }) => {
     setIsMessageVisible(false); // Assuming you have a state called isMessageVisible
   };
 
-  // State for controlling the disabled state of buy and sell buttons
-  const [isBuyDisabled, setIsBuyDisabled] = useState(false);
-  const [isSellDisabled, setIsSellDisabled] = useState(false);
+  useEffect(() => {
+    if (isTagVisible) {
+      const timer = setTimeout(() => {
+        setIsTagVisible(false);
+      }, 3000); // Adjust the time as needed
 
-  // Error message states
-  const [buyErrorMessage, setBuyErrorMessage] = useState("");
-  const [sellErrorMessage, setSellErrorMessage] = useState("");
-
-  // Fetch wallet balance
-  const getWalletBalance = async () => {
-    try {
-      const response = await axios.get("/balance");
-      if (response.data && response.data.length > 0) {
-        setWallet(response.data[0].balance); // Assuming the balance is in the first object of the response array
-      }
-    } catch (error) {
-      console.error("Failed to fetch wallet balance:", error);
-      // Handle error (e.g., by setting state to show an error message to the user)
+      return () => clearTimeout(timer); // Cleanup the timer
     }
+  }, [isTagVisible]);
+
+  const getOwnedQuantity = (ticker) => {
+    const stock = portfolio.find((p) => p.ticker === ticker);
+    return stock ? stock.quantity : 0;
   };
-
-  // Fetch portfolio data
-  const getPortfolio = async () => {
-    try {
-      const response = await axios.get("/portfolio");
-      if (response.data) {
-        setPortfolio(response.data); // Assuming the API returns an array of portfolio items
-      }
-    } catch (error) {
-      console.error("Failed to fetch portfolio:", error);
-      // Handle error
-    }
-  };
-
-  // Fetch wallet balance and portfolio data on component mount
-  useEffect(() => {
-    // You should have functions getWalletBalance and getPortfolio implemented similar to what was shown
-    getWalletBalance();
-    getPortfolio();
-  }, []);
-
-  // Real-time validation for buying
-  useEffect(() => {
-    const purchaseCost = stockToBuy.quantity * stockInfo.c;
-    if (purchaseCost > wallet) {
-      setBuyErrorMessage("Not enough money in wallet!");
-      setIsBuyDisabled(true);
-    } else {
-      setBuyErrorMessage("");
-      setIsBuyDisabled(false);
-    }
-  }, [stockToBuy.quantity, wallet, stockInfo.c]);
-
-  // Real-time validation for selling
-  useEffect(() => {
-    const portfolioItem = portfolio.find(
-      (p) => p.ticker === stockToSell.ticker
-    );
-    const sellQuantity = stockToSell.quantity;
-    if (!portfolioItem || sellQuantity > portfolioItem.quantity) {
-      setSellErrorMessage("You cannot sell stocks that you don't have!");
-      setIsSellDisabled(true);
-    } else {
-      setSellErrorMessage("");
-      setIsSellDisabled(false);
-    }
-  }, [stockToSell.quantity, portfolio, stockToSell.ticker]);
 
   return (
     <div className="stock-search-container">
       <h1>STOCK SEARCH</h1>
       <Searchbar onSearch={onSearch} />
-      {isLoading ? (
+      {isLoading || isDailyDataLoading ? (
         <div
           style={{
             display: "flex",
@@ -1024,27 +706,20 @@ const Search = ({ onSearch }) => {
             <div></div>
           </div>
         </div>
-      ) : stockInfo && stockInfo.d === null ? (
+      ) : stockInfo && stockInfo.d === null && searchAttempted ? (
         isMessageVisible && (
           <div
             style={{
-              color: "red", // Red text
-              margin: "10px 0",
-              padding: "10px",
-              backgroundColor: "#ffdada", // Light red background for emphasis
+              width: "80%",
+              backgroundColor: "#ff3b6b",
+              margin: "20px auto",
+              padding: "20px",
+              textAlign: "center",
               borderRadius: "5px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              fontSize: "20px",
             }}
           >
-            {ticker === undefined
-              ? "Ticker cannot be null. Please enter a ticker symbol."
-              : "Please enter a valid ticker"}
-            {console.log(
-              "Ticker cannot be null. Please enter a ticker:",
-              ticker
-            )}
+            Please enter a valid ticker
             <button
               onClick={handleCloseMessage} // You need to define this function to handle closing the message
               style={{
@@ -1063,6 +738,21 @@ const Search = ({ onSearch }) => {
         stockCompanyInfo &&
         stockInfo && (
           <div className="main-body">
+            <br></br>
+            {isTagVisible && (
+              <div className={`alert-message ${tagMessage.type}`}>
+                {tagMessage.text}
+                <button
+                  className="close-button"
+                  onClick={() => setIsTagVisible(false)}
+                  aria-label="Close alert message"
+                >
+                  &times;{" "}
+                  {/* This is the HTML entity for a multiplication sign, commonly used as a close icon */}
+                </button>
+              </div>
+            )}
+
             {stockCompanyInfo && stockInfo && (
               <div>
                 <div className="stock-details">
@@ -1074,7 +764,8 @@ const Search = ({ onSearch }) => {
                         style={{
                           cursor: "pointer",
                           color: isInWatchlist ? "yellow" : "grey",
-                          padding: "20px 5px",
+                          paddingLeft: "5px",
+                          fontSize: "2rem",
                         }}
                       >
                         ★
@@ -1089,7 +780,7 @@ const Search = ({ onSearch }) => {
                       <button className="buy-buttonM" onClick={handleBuyClick}>
                         Buy
                       </button>
-                      {portfolio.some(
+                      {(portfolio || []).some(
                         (p) => p.ticker === stockCompanyInfo?.ticker
                       ) && (
                         <button
@@ -1098,7 +789,7 @@ const Search = ({ onSearch }) => {
                         >
                           Sell
                         </button>
-                      )}{" "}
+                      )}
                     </div>
                   </div>
                   <div className="stock-logo-center">
@@ -1120,7 +811,7 @@ const Search = ({ onSearch }) => {
                         stockInfo.d < 0 ? "negative" : "positive"
                       }`}
                     >
-                      {stockInfo.c}
+                      {stockInfo.c.toFixed(2)}
                     </p>
                     {/* <p>{formatTimestamp(stockInfo.t)}</p> */}
                     <p
@@ -1165,16 +856,17 @@ const Search = ({ onSearch }) => {
                     <div className="summary-grid">
                       <div className="Prices">
                         <p>
-                          <strong>High Price:</strong> {stockInfo.h}
+                          <strong>High Price:</strong> {stockInfo.h.toFixed(2)}
                         </p>
                         <p>
-                          <strong>Low Price:</strong> {stockInfo.l}
+                          <strong>Low Price:</strong> {stockInfo.l.toFixed(2)}
                         </p>
                         <p>
-                          <strong>Open Price:</strong> {stockInfo.o}
+                          <strong>Open Price:</strong> {stockInfo.o.toFixed(2)}
                         </p>
                         <p>
-                          <strong>Prev. Close:</strong> {stockInfo.pc}
+                          <strong>Prev. Close:</strong>{" "}
+                          {stockInfo.pc.toFixed(2)}
                         </p>
                       </div>
                       <div className="About-the-company">
@@ -1188,66 +880,46 @@ const Search = ({ onSearch }) => {
                           </a>
                         </p>
 
-                        <h4>Company peers:</h4>
                         <div>
-                          {peers.map((peerTicker, index) => (
-                            <span key={peerTicker}>
-                              <Link to={`/search/${peerTicker}`}>
-                                {peerTicker}
-                              </Link>
-                              {index < peers.length - 1 ? ", " : ""}
-                            </span>
-                          ))}
+                          <h4>Company peers:</h4>
+                          <div>
+                            {peers.map((peerTicker, index) => (
+                              <span key={peerTicker}>
+                                <Link to={`/search/${peerTicker}`}>
+                                  {peerTicker}
+                                </Link>
+                                {index < peers.length - 1 ? ", " : ""}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
+
                       <div className="chart1">
-                        {stockChartData && (
+                        {
                           <StockChart1
                             key={stockCompanyInfo.ticker + Date.now()} // Ensures component re-renders with each search
                             dailyStockData={stockChartData}
                             marketOpen={marketStatus.isOpen}
                             ticker={stockCompanyInfo.ticker}
                           />
-                        )}
+                        }
                       </div>
                     </div>
                   )}
 
                   {activeTab === "news" && (
                     <div>
-                      <div
-                        className="news-container"
-                        style={{
-                          display: "grid",
-                          gridTemplateColumns: "1fr 1fr",
-                          gridGap: "20px",
-                          gridAutoRows: "minmax(100px, auto)",
-                        }}
-                      >
+                      <div className="news-container">
                         {news.map(
                           (article, index) =>
-                            index < 8 && (
+                            index < 16 && (
                               <button
                                 key={article.id}
                                 className="news-item"
                                 onClick={() => openModalWithNews(article)}
-                                style={
-                                  {
-                                    /* ... your news item styles ... */
-                                  }
-                                }
                               >
-                                <div
-                                  key={article.id}
-                                  className="news-item"
-                                  style={{
-                                    padding: "10px",
-                                    borderColor: "dark grey",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "start",
-                                  }}
-                                >
+                                <div key={article.id} className="news-item">
                                   <img
                                     src={article.image}
                                     alt=""
@@ -1280,14 +952,20 @@ const Search = ({ onSearch }) => {
                             alignItems: "center",
                             zIndex: 1000, // Ensure it's above other content
                           }}
+                          onClick={(e) => {
+                            // Close modal if click is on overlay
+                            if (e.target.className === "modal") {
+                              closeModal();
+                            }
+                          }}
                         >
                           <div
                             className="modal-content"
                             style={{
                               backgroundColor: "#fff",
                               borderRadius: "5px",
-                              minWidth: "30%",
-                              maxWidth: "30%",
+                              minWidth: "300px",
+                              maxWidth: "500px",
                               textAlign: "left",
                             }}
                           >
@@ -1409,146 +1087,109 @@ const Search = ({ onSearch }) => {
       <div>
         {buyModalOpen && (
           <Modal isOpen={buyModalOpen} onClose={() => setBuyModalOpen(false)}>
-            <div>{stockToBuy.ticker}</div>
-            <hr></hr>
+            <div> {stockToBuy.ticker}</div>
+            <hr />
             <p>Current Price: {stockInfo.c}</p>
             <p>Money in Wallet: {wallet.toFixed(2)}</p>
-            <div className="model-input">
-              Quantity:
-              <input
-                min={0}
-                type="number"
-                value={stockToBuy.quantity}
-                onChange={(e) => {
-                  const quantity = parseInt(e.target.value) || 0;
-                  setStockToBuy({
-                    ...stockToBuy,
-                    quantity: quantity,
-                  });
-                  // Automatically clear the error message if the condition is corrected
-                  if (quantity * stockInfo.c <= wallet) {
-                    setBuyErrorMessage("");
-                  }
-                }}
-                placeholder="Quantity"
-              />
-            </div>
-            <div>
-              {buyErrorMessage && (
-                <p style={{ color: "red" }}>{buyErrorMessage}</p>
-              )}
-            </div>
-            <hr></hr>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p>
-                Total Cost: ${(stockToBuy.quantity * stockInfo.c).toFixed(2)}
-              </p>
+            <input
+              type="number"
+              min="1"
+              value={stockToBuy.quantity}
+              onChange={(e) =>
+                setStockToBuy({
+                  ...stockToBuy,
+                  quantity: parseInt(e.target.value),
+                })
+              }
+              placeholder="Quantity"
+            />
+            <hr />
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <button
-                className="stock-buttons, buy-button"
-                style={{
-                  backgroundColor:
-                    isBuyDisabled || stockToBuy.quantity * stockInfo.c > wallet
-                      ? "#f0f0f0"
-                      : "#28a745", // light gray or your preferred enabled color
-                  color:
-                    isBuyDisabled || stockToBuy.quantity * stockInfo.c > wallet
-                      ? "#dcdcdc"
-                      : "#ffffff", // light text color for disabled or white for enabled
-                  cursor:
-                    isBuyDisabled || stockToBuy.quantity * stockInfo.c > wallet
-                      ? "not-allowed"
-                      : "pointer",
-                }}
-                disabled={
-                  isBuyDisabled || stockToBuy.quantity * stockInfo.c > wallet
-                }
+                className="buy-buttonM"
                 onClick={handleBuyStock}
+                disabled={stockToBuy.quantity * stockInfo.c > wallet}
+                style={{
+                  opacity: stockToBuy.quantity * stockInfo.c > wallet ? 0.5 : 1, // Reduce opacity if disabled
+                }}
               >
-                Buy
+                Confirm Buy
               </button>
+              <p>
+                Total:
+                {isNaN(stockToBuy.quantity * stockInfo.c)
+                  ? 0
+                  : (stockToBuy.quantity * stockInfo.c).toFixed(2)}
+              </p>
             </div>
+            {stockToBuy.quantity * stockInfo.c > wallet && (
+              <p style={{ color: "red" }}>Not enough money in wallet.</p>
+            )}
           </Modal>
         )}
-
         {sellModalOpen && (
           <Modal isOpen={sellModalOpen} onClose={() => setSellModalOpen(false)}>
             <div>{stockToSell.ticker}</div>
+            <hr />
+            <p>Current Price: {stockInfo?.c}</p>
+            <p>Money in Wallet: {wallet.toFixed(2)}</p>
+            <input
+              type="number"
+              min="1"
+              value={stockToSell.quantity}
+              onChange={(e) =>
+                setStockToSell({
+                  ...stockToSell,
+                  quantity: parseInt(e.target.value),
+                })
+              }
+              placeholder="Quantity"
+            />
             <hr></hr>
-            <p>Current Price: {stockInfo.c}</p>
-            <p>
-              Quantity Owned:{" "}
-              {portfolio.find((p) => p.ticker === stockToSell.ticker)
-                ?.quantity || 0}
-            </p>
-            <div className="model-input">
-              Quantity:
-              <input
-                min={0}
-                type="number"
-                value={stockToSell.quantity}
-                onChange={(e) => {
-                  const quantity = parseInt(e.target.value) || 0;
-                  setStockToSell({
-                    ...stockToSell,
-                    quantity: quantity,
-                  });
-                  // Automatically clear the error message if the condition is corrected
-                  const portfolioItem = portfolio.find(
-                    (p) => p.ticker === stockToSell.ticker
-                  );
-                  if (portfolioItem && quantity <= portfolioItem.quantity) {
-                    setSellErrorMessage("");
-                  }
-                }}
-                placeholder="Quantity"
-              />
-            </div>
-            <div>
-              {sellErrorMessage && (
-                <p style={{ color: "red" }}>{sellErrorMessage}</p>
-              )}
-            </div>
-            <hr></hr>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p>
-                Total Value: ${(stockToSell.quantity * stockInfo.c).toFixed(2)}
-              </p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <button
-                style={{
-                  backgroundColor:
-                    isSellDisabled ||
-                    !portfolio.find((p) => p.ticker === stockToSell.ticker)
-                      ?.quantity >= stockToSell.quantity
-                      ? "#f0f0f0"
-                      : "#28a745", // light gray or your preferred enabled color for sell
-                  color:
-                    isSellDisabled ||
-                    !portfolio.find((p) => p.ticker === stockToSell.ticker)
-                      ?.quantity >= stockToSell.quantity
-                      ? "#dcdcdc"
-                      : "#ffffff", // light text color for disabled or white for enabled
-                  cursor:
-                    isSellDisabled ||
-                    !portfolio.find((p) => p.ticker === stockToSell.ticker)
-                      ?.quantity >= stockToSell.quantity
-                      ? "not-allowed"
-                      : "pointer",
-                }}
-                className="stock-buttons, sell-button"
-                disabled={
-                  isSellDisabled ||
-                  !portfolio.find((p) => p.ticker === stockToSell.ticker)
-                    ?.quantity >= stockToSell.quantity
-                }
+                className="sell-buttonM"
                 onClick={handleSellStock}
+                disabled={
+                  stockToSell.quantity > getOwnedQuantity(stockToSell.ticker)
+                }
+                style={{
+                  opacity:
+                    stockToSell.quantity > getOwnedQuantity(stockToSell.ticker)
+                      ? 0.5
+                      : 1, // Reduce opacity if disabled
+                }}
               >
-                Sell
+                Confirm Sell
               </button>
+              <p>
+                Total:
+                {isNaN(stockToSell.quantity * stockInfo.c)
+                  ? 0
+                  : (stockToSell.quantity * stockInfo.c).toFixed(2)}
+              </p>
             </div>
+            {stockToSell.quantity > getOwnedQuantity(stockToSell.ticker) && (
+              <p style={{ color: "red" }}>Not enough stock to sell.</p>
+            )}
           </Modal>
         )}
       </div>
     </div>
   );
 };
+
 export default Search;

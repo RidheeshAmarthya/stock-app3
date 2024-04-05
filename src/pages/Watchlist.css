@@ -1,15 +1,26 @@
 /* Watchlist.css */
 .watchlist-container {
-  align-items: center;
-  padding-left: 20%;
-  padding-right: 20%;
+  max-width: 80%;
+  margin: 0 auto;
   font-family: "Arial", sans-serif;
+}
+
+.watchlist-container h2 {
+  text-align: left;
 }
 
 .watchlist-header {
   padding: 20px;
   font-family: "Arial", sans-serif;
   font-size: 24px; /* Adjust size as needed */
+}
+
+.empty-watchlist-message {
+  background-color: #fff0c8;
+  padding: 25px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 .stock-item {
@@ -61,7 +72,7 @@
   color: #f44336; /* Red color, you can choose a different shade if you prefer */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .Right-Prices {
     padding-right: 0;
   }
